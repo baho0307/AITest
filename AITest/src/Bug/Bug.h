@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <iomanip>
+#include <vector>
 
 enum DIR
 {
@@ -17,10 +18,11 @@ public:
 	Bug(int x, int y, DIR dir = UP);
 	void	Move(DIR moveDir);
 	void	DebugLOG();
+	std::vector<float>	Look(std::vector< std::vector<char>> map);
 
 private:
-	int	m_X;
-	int	m_Y;
-	DIR	m_Dir;
+	int		m_X;
+	int		m_Y;
+	DIR		m_Dir;
 };
 

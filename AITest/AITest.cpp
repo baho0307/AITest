@@ -1,5 +1,7 @@
 ﻿#include "src/Program.h"
 
+//OUTPUT SHOULD BE 4 
+
 int main()
 {
 	Vector	v;

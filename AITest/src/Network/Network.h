@@ -6,11 +6,12 @@
 class Network
 {
 public:
-	Network(int n = 3);
-	void	CalcOut(Vector in);
-	Vector	GetDecision();
-	std::vector<Neuron> neurons;
+	Network(std::vector<int> layers);
+	void	CalcOut(std::vector<float> in);
+	std::vector<float>	GetDecision();
+	std::vector<std::vector<Neuron>> neurons;
 private:
-	Vector	decision;
+	std::vector<float>	decision;
+
 };
 

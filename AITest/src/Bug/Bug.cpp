@@ -28,3 +28,26 @@ void Bug::DebugLOG()
 	std::cout << std::setw(6) << "DIR: " << DIR(m_Dir) << std::endl;
 }
 
+std::vector<float> Bug::Look(std::vector< std::vector<char>> map)
+{
+	std::vector<float>	lookData;
+	float	f;
+	int		i;
+
+	i = 0;
+	f = 0;
+	if (m_Dir == LEFT || m_Dir == RIGHT)
+	{
+		//
+		while (map[i][m_Y] =! '1' && i > 0)
+		{
+			f++;
+			i += m_Dir;
+		}
+		lookData.push_back(f);
+		//FRONT, RIGHT AND LEFT INPUTS WILL BE ADDED
+	}
+
+	return lookData;
+}
+

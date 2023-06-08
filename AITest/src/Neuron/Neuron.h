@@ -3,25 +3,20 @@
 #include <iostream>
 #include <iomanip>
 #include <random>
-
-typedef struct Vector
-{
-	float	x;
-	float	y;
-	float	z;
-} Verctor;
+#include <vector>
+#include "../Bug/Bug.h"
 
 class Neuron
 {
 public:
-	Neuron();
-	void	Calc(Vector in);
+	Neuron(int n);
+	void	Calc(std::vector<float> in);
 	void	DebugLOG();
 	float	GetOut();
 
 private:
-	Vector	weight;
-	float	bias;
-	float	out;
+	std::vector<float>	weights;
+	float				bias;
+	float				out;
 };
 
