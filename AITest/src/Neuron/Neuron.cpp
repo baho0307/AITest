@@ -13,6 +13,7 @@ Neuron::Neuron(int n)
 	{
 		weights.push_back( r);
 		r = dis(gen);
+		i++;
 	}
 	r = dis(gen);
 	bias = r;
@@ -23,6 +24,8 @@ void Neuron::Calc(std::vector<float> in)
 	int	i;
 
 	i = 0;
+	//Reseting previous out:
+	out = 0;
 	while (i < in.size())
 		out += in[i] * weights[i];
 	out += bias;
@@ -43,4 +46,23 @@ void Neuron::DebugLOG()
 float Neuron::GetOut()
 {
 	return out;
+}
+
+void Neuron::Mutate()
+{
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_real_distribution<> dis(0.0, 1.0);
+	float	r = dis(gen);
+	int		i;
+
+	i = 0;
+	while (i < weights.size())
+	{
+		weights[i] = r;
+		r = dis(gen);
+		i++;
+	}
+	r = dis(gen);
+	bias = r;
 }

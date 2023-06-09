@@ -15,6 +15,7 @@ enum DIR
 class Bug
 {
 public:
+	Bug();
 	Bug(int x, int y, DIR dir = UP);
 	void	Move(DIR moveDir);
 	void	DebugLOG();

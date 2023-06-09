@@ -6,9 +6,9 @@ class SAR
 {
 public:
 	SAR();
-	void	DecideSit(Network net, Vector sit);
-	Vector	situation;
-	DIR		action;
-	float	reward;
+	std::vector<float>	situation;
+	void				DecideSit(Network net, std::vector<float> sit);
+	DIR					action;
+	float				reward;
 };
 

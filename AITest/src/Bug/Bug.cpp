@@ -1,5 +1,9 @@
 #include "Bug.h"
 
+Bug::Bug()
+{
+}
+
 Bug::Bug(int x, int y, DIR dir)
 {
 	m_X = x;
@@ -38,14 +42,49 @@ std::vector<float> Bug::Look(std::vector< std::vector<char>> map)
 	f = 0;
 	if (m_Dir == LEFT || m_Dir == RIGHT)
 	{
-		//
-		while (map[i][m_Y] =! '1' && i > 0)
+		while (map[m_Y][i] =! '1' && i >= 0)
 		{
 			f++;
 			i += m_Dir;
 		}
 		lookData.push_back(f);
-		//FRONT, RIGHT AND LEFT INPUTS WILL BE ADDED
+		f = 0;
+		while (map[i][m_X] =! '1' && i >= 0)
+		{
+			f++;
+			i -= m_Dir;
+		}
+		lookData.push_back(f);
+		f = 0;
+		while (map[i][m_X] =! '1' && i >= 0)
+		{
+			f++;
+			i += m_Dir;
+		}
+		lookData.push_back(f);
+	}
+	else
+	{
+		while (map[i][m_X] =! '1' && i >= 0)
+		{
+			f++;
+			i += m_Dir / 2;
+		}
+		lookData.push_back(f);
+		f = 0;
+		while (map[m_Y][i] =! '1' && i >= 0)
+		{
+			f++;
+			i -= m_Dir / 2;
+		}
+		lookData.push_back(f);
+		f = 0;
+		while (map[m_Y][i] =! '1' && i >= 0)
+		{
+			f++;
+			i += m_Dir / 2;
+		}
+		lookData.push_back(f);
 	}
 
 	return lookData;

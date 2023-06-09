@@ -1,5 +1,9 @@
 #include "Network.h"
 
+Network::Network()
+{
+}
+
 Network::Network(std::vector<int> n)
 {
 	int	i;
@@ -36,6 +40,7 @@ void				Network::CalcOut(std::vector<float> in)
 		while (j < neurons[i].size())
 		{
 			sNext.push_back(neurons[i][j].GetOut());
+			i++;
 		}
 		sTemp = sNext;
 		sNext = sIn;
@@ -43,6 +48,37 @@ void				Network::CalcOut(std::vector<float> in)
 	}
 
 	decision = sIn;
+}
+
+void Network::Mutate(MUTATE_OPT option)
+{
+	if (option == RANDOM_NEURON)
+	{
+		std::random_device rd;
+		std::mt19937 gen(rd());
+		std::uniform_int_distribution<> dis(0, neurons.size());
+		int	i = dis(gen);
+		std::uniform_int_distribution<> adis(0, neurons[i].size());
+		int	j = adis(gen);
+		neurons[i][j].Mutate();
+	}
+	else if (option == ALL_NEURONS)
+	{
+		int	i;
+		int	j;
+
+		i = 0;
+		while (i < neurons.size())
+		{
+			j = 0;
+			while (i < neurons[i].size())
+			{
+				neurons[i][j].Mutate();
+				j++;
+			}
+			i++;
+		}
+	}
 }
 
 std::vector<float>	 Network::GetDecision()

@@ -13,6 +13,7 @@ public:
 	void	Calc(std::vector<float> in);
 	void	DebugLOG();
 	float	GetOut();
+	void	Mutate();
 
 private:
 	std::vector<float>	weights;
