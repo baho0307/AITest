@@ -6,8 +6,11 @@
 class Episode
 {
 public:
+	Episode(int lifetime, std::vector<int> netLayer, std::vector<std::vector<char>> map);
 	void				AddLifetime(int count);
-	Episode(int lifetime, std::vector<int> netLayer);
+	void				Start();
+private:
+	std::vector<std::vector<char>> map;
 	std::vector<SAR>	episode;
 	Bug					bug;
 	Network				net;

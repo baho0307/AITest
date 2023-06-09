@@ -42,49 +42,49 @@ std::vector<float> Bug::Look(std::vector< std::vector<char>> map)
 	f = 0;
 	if (m_Dir == LEFT || m_Dir == RIGHT)
 	{
-		while (map[m_Y][i] =! '1' && i >= 0)
+		while ((map[m_Y][i] != '0' - 1 || map[m_Y][i] != '1') && i >= 0)
 		{
 			f++;
 			i += m_Dir;
 		}
-		lookData.push_back(f);
+		lookData.push_back(f * (map[m_Y][i] - '0'));
 		f = 0;
-		while (map[i][m_X] =! '1' && i >= 0)
+		while ((map[i][m_X] != '0' - 1 || map[i][m_X] != '1') && i >= 0)
 		{
 			f++;
 			i -= m_Dir;
 		}
-		lookData.push_back(f);
+		lookData.push_back(f * (map[i][m_X] - '0'));
 		f = 0;
-		while (map[i][m_X] =! '1' && i >= 0)
+		while ((map[i][m_X] != '0' - 1 || map[i][m_X] != '1') && i >= 0)
 		{
 			f++;
 			i += m_Dir;
 		}
-		lookData.push_back(f);
+		lookData.push_back(f * (map[i][m_X] - '0'));
 	}
 	else
 	{
-		while (map[i][m_X] =! '1' && i >= 0)
+		while ((map[i][m_X] != '0' - 1 || map[i][m_X] != '1') && i >= 0)
 		{
 			f++;
 			i += m_Dir / 2;
 		}
-		lookData.push_back(f);
+		lookData.push_back(f * (map[i][m_X] - '0'));
 		f = 0;
-		while (map[m_Y][i] =! '1' && i >= 0)
+		while ((map[m_Y][i] != '0' - 1 || map[m_Y][i] != '1') && i >= 0)
 		{
 			f++;
 			i -= m_Dir / 2;
 		}
-		lookData.push_back(f);
+		lookData.push_back(f * (map[m_Y][i] - '0'));
 		f = 0;
-		while (map[m_Y][i] =! '1' && i >= 0)
+		while ((map[m_Y][i] != '0' - 1 || map[m_Y][i] != '1') && i >= 0)
 		{
 			f++;
 			i += m_Dir / 2;
 		}
-		lookData.push_back(f);
+		lookData.push_back(f * (map[m_Y][i] - '0'));
 	}
 
 	return lookData;
