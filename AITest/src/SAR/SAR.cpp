@@ -23,6 +23,7 @@ void SAR::DecideSit(Network net, std::vector<float> sit)
 			f = net.GetDecision()[i];
 			max_i = i;
 		}
+		i++;
 	}
 	action = d[max_i];
 	reward = 10;

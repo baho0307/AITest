@@ -21,6 +21,7 @@ public:
 	void	DebugLOG();
 	int		GetX();
 	int		GetY();
+	DIR		GetDIR();
 	std::vector<float>	Look(std::vector< std::vector<char>> map);
 
 private:

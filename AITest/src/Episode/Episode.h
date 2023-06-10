@@ -8,10 +8,16 @@ class Episode
 {
 public:
 	Episode(int lifetime, std::vector<int> netLayer, int mapSize);
+	std::vector<std::vector<char>>	GetMap();
 	void				AddLifetime(int count);
 	void				Start();
 	float				GetPoint();
+	int					GetBugX();
+	int					GetBugY();
+	DIR					GetBugDIR();
 	void				Reset(MUTATE_OPT opt, int lifetime, int mapSize);
+	bool				GetLife();
+	
 private:
 	Map					map;
 	std::vector<SAR>	episode;

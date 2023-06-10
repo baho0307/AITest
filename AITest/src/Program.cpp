@@ -9,8 +9,21 @@ Program::Program(std::vector<int> neuronCount, int genExCount, int mapSize)
 	while (i < genExCount)
 	{
 		gen.push_back(Episode(50, neuronCount, mapSize));
+		i++;
 	}
 	genCounter = 0;
+	best = 0;
+	scr = Draw();
+}
+
+Program::Program()
+{
+
+}
+
+int Program::GetGenCount()
+{
+	return genCounter;
 }
 
 void Program::GenReset()
@@ -44,6 +57,21 @@ void Program::GenReset()
 			gen[i].Reset(ALL_NEURONS, 50, mapSize);
 		i++;
 	}
+	best = max_i;
+}
+
+bool Program::IsFinished()
+{
+	int		i;
+
+	i = 0;
+	while (i < gen.size())
+	{
+		if (gen[i].GetLife())
+			return true;
+		i++;
+	}
+	return false;
 }
 
 void Program::Start()
@@ -53,12 +81,15 @@ void Program::Start()
 	while (true)
 	{
 		i = 0;
-		while (i < gen.size())
+		while (i < gen.size() && IsFinished())
 		{
 			gen[i].Start();
+			if (i == best)
+				scr.Show(genCounter, gen[best]);
 			i++;
 		}
 		GenReset();
 		genCounter++;
 	}
 }
+

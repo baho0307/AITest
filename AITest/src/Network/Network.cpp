@@ -14,9 +14,10 @@ Network::Network(std::vector<int> n)
 	while (i < n.size())
 	{
 		j = 0;
+		neurons.push_back(std::vector<Neuron>());
 		while (j < n[i])
 		{
-			neurons[i].push_back(Neuron(i ? 3 : n[i - 1]));
+			neurons[i].push_back(Neuron(!i ? 3 : n[i - 1]));
 			j++;
 		}
 		i++;
@@ -40,11 +41,12 @@ void				Network::CalcOut(std::vector<float> in)
 		while (j < neurons[i].size())
 		{
 			sNext.push_back(neurons[i][j].GetOut());
-			i++;
+			j++;
 		}
 		sTemp = sNext;
 		sNext = sIn;
 		sIn = sTemp;
+		i++;
 	}
 
 	decision = sIn;
@@ -56,9 +58,9 @@ void Network::Mutate(MUTATE_OPT option)
 	{
 		std::random_device rd;
 		std::mt19937 gen(rd());
-		std::uniform_int_distribution<> dis(0, neurons.size());
+		std::uniform_int_distribution<> dis(0, neurons.size() - 1);
 		int	i = dis(gen);
-		std::uniform_int_distribution<> adis(0, neurons[i].size());
+		std::uniform_int_distribution<> adis(0, neurons[i].size() - 1);
 		int	j = adis(gen);
 		neurons[i][j].Mutate();
 	}
@@ -71,7 +73,7 @@ void Network::Mutate(MUTATE_OPT option)
 		while (i < neurons.size())
 		{
 			j = 0;
-			while (i < neurons[i].size())
+			while (j < neurons[i].size())
 			{
 				neurons[i][j].Mutate();
 				j++;

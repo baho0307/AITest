@@ -27,7 +27,10 @@ void Neuron::Calc(std::vector<float> in)
 	//Reseting previous out:
 	out = 0;
 	while (i < in.size())
+	{
 		out += in[i] * weights[i];
+		i++;
+	}
 	out += bias;
 }
 

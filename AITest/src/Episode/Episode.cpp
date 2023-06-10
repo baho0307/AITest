@@ -20,11 +20,15 @@ void Episode::Start()
 	while (i < episode.size() && isAlive)
 	{
 		episode[i].DecideSit(net, bug.Look(map.GetMap()));
-		bug.Move(episode[i].action);
 		if (map.GetMap()[bug.GetY()][bug.GetX()] == '0' - 1)
 			isAlive = false;
 		else if (map.GetMap()[bug.GetY()][bug.GetX()] == '1')
+		{
 			AddLifetime(25);
+			map.GenerateFood();
+		}
+		else
+			bug.Move(episode[i].action);
 		point += episode[i].reward;
 		i++;
 	}
@@ -34,6 +38,21 @@ void Episode::Start()
 float Episode::GetPoint()
 {
 	return point;
+}
+
+int Episode::GetBugX()
+{
+	return bug.GetX();
+}
+
+int Episode::GetBugY()
+{
+	return bug.GetY();
+}
+
+DIR Episode::GetBugDIR()
+{
+	return bug.GetDIR();
 }
 
 void Episode::Reset(MUTATE_OPT opt, int lifetime, int mapSize)
@@ -53,6 +72,11 @@ void Episode::Reset(MUTATE_OPT opt, int lifetime, int mapSize)
 	point = 0;
 }
 
+bool Episode::GetLife()
+{
+	return isAlive;
+}
+
 Episode::Episode(int lifetime, std::vector<int> netLayer, int mapSize)
 {
 	std::random_device rd;
@@ -67,4 +91,9 @@ Episode::Episode(int lifetime, std::vector<int> netLayer, int mapSize)
 	map = Map(mapSize, mapSize);
 	isAlive = true;
 	point = 0;
+}
+
+std::vector<std::vector<char>> Episode::GetMap()
+{
+	return this->map.GetMap();
 }
