@@ -32,6 +32,16 @@ void Bug::DebugLOG()
 	std::cout << std::setw(6) << "DIR: " << DIR(m_Dir) << std::endl;
 }
 
+int Bug::GetX()
+{
+	return m_X;
+}
+
+int Bug::GetY()
+{
+	return m_Y;
+}
+
 std::vector<float> Bug::Look(std::vector< std::vector<char>> map)
 {
 	std::vector<float>	lookData;

@@ -2,19 +2,23 @@
 
 #include "../Bug/Bug.h"
 #include "../SAR/SAR.h"
+#include "../Map/Map.h"
 
 class Episode
 {
 public:
-	Episode(int lifetime, std::vector<int> netLayer, std::vector<std::vector<char>> map);
+	Episode(int lifetime, std::vector<int> netLayer, int mapSize);
 	void				AddLifetime(int count);
 	void				Start();
+	float				GetPoint();
+	void				Reset(MUTATE_OPT opt, int lifetime, int mapSize);
 private:
-	std::vector<std::vector<char>> map;
+	Map					map;
 	std::vector<SAR>	episode;
 	Bug					bug;
 	Network				net;
 	float				point;
+	bool				isAlive;
 
 };
 

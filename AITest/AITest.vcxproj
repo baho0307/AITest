@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AITest.cpp" />
+    <ClCompile Include="src\Map\Map.cpp" />
     <ClCompile Include="src\Network\Network.cpp" />
     <ClCompile Include="src\Neuron\Neuron.cpp" />
     <ClCompile Include="src\Bug\Bug.cpp" />
@@ -136,6 +137,7 @@
     <ClCompile Include="src\Program.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Map\Map.h" />
     <ClInclude Include="src\Network\Network.h" />
     <ClInclude Include="src\Neuron\Neuron.h" />
     <ClInclude Include="src\Bug\Bug.h" />

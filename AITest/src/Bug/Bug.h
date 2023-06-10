@@ -19,6 +19,8 @@ public:
 	Bug(int x, int y, DIR dir = UP);
 	void	Move(DIR moveDir);
 	void	DebugLOG();
+	int		GetX();
+	int		GetY();
 	std::vector<float>	Look(std::vector< std::vector<char>> map);
 
 private:

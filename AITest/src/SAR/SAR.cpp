@@ -2,7 +2,7 @@
 
 SAR::SAR()
 {
-	reward = 10;
+	reward = 0;
 }
 
 void SAR::DecideSit(Network net, std::vector<float> sit)
@@ -25,5 +25,6 @@ void SAR::DecideSit(Network net, std::vector<float> sit)
 		}
 	}
 	action = d[max_i];
+	reward = 10;
 }
 
