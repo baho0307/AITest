@@ -18,6 +18,7 @@ public:
 	Bug();
 	Bug(int x, int y, DIR dir = UP);
 	void	Move(DIR moveDir);
+	void	Turn(DIR moveInp);
 	void	DebugLOG();
 	int		GetX();
 	int		GetY();

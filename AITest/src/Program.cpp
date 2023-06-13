@@ -81,7 +81,7 @@ void Program::Start()
 	while (true)
 	{
 		i = 0;
-		while (i < gen.size() && IsFinished())
+		while (i < gen.size())
 		{
 			gen[i].Start(i == best);
 			i++;

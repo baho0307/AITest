@@ -62,8 +62,8 @@ void Episode::Start(bool show)
 			isAlive = false;
 		else if (map.GetMap()[bug.GetY()][bug.GetX()] == '1')
 		{
-			AddLifetime(25);
 			map.GenerateFood();
+			AddLifetime(25);
 		}
 		point += episode[i].reward;
 		if (show)

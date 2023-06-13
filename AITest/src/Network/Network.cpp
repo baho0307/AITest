@@ -30,7 +30,6 @@ void				Network::CalcOut(std::vector<float> in)
 	int	j;
 	//updated hidden layers input
 	std::vector<float>	sIn;
-	std::vector<float>	sTemp;
 	std::vector<float>	sNext;
 
 	sIn = in;
@@ -40,12 +39,12 @@ void				Network::CalcOut(std::vector<float> in)
 		j = 0;
 		while (j < neurons[i].size())
 		{
+			neurons[i][j].Calc(sIn);
 			sNext.push_back(neurons[i][j].GetOut());
 			j++;
 		}
-		sTemp = sNext;
-		sNext = sIn;
-		sIn = sTemp;
+		sIn = sNext;
+		sNext.clear();
 		i++;
 	}
 

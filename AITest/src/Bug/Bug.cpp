@@ -97,14 +97,6 @@ std::vector<float> Bug::Look(std::vector< std::vector<char>> map)
 		}
 		lookData.push_back((map[m_Y][i] - '0') / f);
 		f = 0;
-		i = m_X;
-		while ((map[m_Y][i] == '0') && i >= 0)
-		{
-			f++;
-			i -= m_Dir;
-		}
-		lookData.push_back((map[m_Y][i] - '0') / f);
-		f = 0;
 		i = m_Y;
 		while ((map[i][m_X] == '0') && i >= 0)
 		{
@@ -128,14 +120,6 @@ std::vector<float> Bug::Look(std::vector< std::vector<char>> map)
 		{
 			f++;
 			i -= m_Dir / 2;
-		}
-		lookData.push_back((map[i][m_X] - '0') / f);
-		f = 0;
-		i = m_Y;
-		while ((map[i][m_X] == '0') && i >= 0)
-		{
-			f++;
-			i += m_Dir / 2;
 		}
 		lookData.push_back((map[i][m_X] - '0') / f);
 		f = 0;
