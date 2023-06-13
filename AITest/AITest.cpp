@@ -4,8 +4,8 @@
 
 int main()
 {
-	std::vector<int>	neuron = { 3, 4 };
-	Program				prg = Program(neuron, 100, 16);
+	std::vector<int>	neuron = { 8, 6, 4 };
+	Program				prg = Program(neuron, 1000, 15);
 
 	prg.Start();
 }

@@ -22,7 +22,6 @@ public:
 	DIR					GetBugDIR();
 	void				Reset(MUTATE_OPT opt, int lifetime, int mapSize);
 	bool				GetLife();
-	
 private:
 	Map					map;
 	std::vector<SAR>	episode;

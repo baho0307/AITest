@@ -42,7 +42,10 @@ void Episode::Show(int SAR)
 		std::cout << std::endl;
 	}
 	std::cout << std::endl;
-	std::cout << std::setw(6) << "MOVE: " << SAR << std::endl;
+	std::cout << std::setw(10) << "MOVE: " << SAR + 1<< std::endl;
+	std::cout << std::setw(10) << "POINT: " << point << std::endl;
+	std::cout << std::setw(10) << "FOOD: " << bug.foodFlag << std::endl;
+
 	bug.DebugLOG();
 }
 
@@ -64,12 +67,13 @@ void Episode::Start(bool show)
 		{
 			map.GenerateFood();
 			AddLifetime(25);
+			point += 100;
 		}
 		point += episode[i].reward;
 		if (show)
 		{
 			Show(i);
-			std::this_thread::sleep_for(std::chrono::milliseconds(100));
+			std::this_thread::sleep_for(std::chrono::milliseconds(10));
 		}
 		i++;
 	}

@@ -15,6 +15,7 @@ public:
 	float	GetOut();
 	void	Mutate();
 
+
 private:
 	std::vector<float>	weights;
 	float				bias;

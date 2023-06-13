@@ -17,14 +17,14 @@ Network::Network(std::vector<int> n)
 		neurons.push_back(std::vector<Neuron>());
 		while (j < n[i])
 		{
-			neurons[i].push_back(Neuron(!i ? 3 : n[i - 1]));
+			neurons[i].push_back(Neuron(!i ? 8 : n[i - 1]));
 			j++;
 		}
 		i++;
 	}
 }
 
-void				Network::CalcOut(std::vector<float> in)
+void Network::CalcOut(std::vector<float> in)
 {
 	int	i;
 	int	j;

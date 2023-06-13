@@ -18,12 +18,12 @@ public:
 	Bug();
 	Bug(int x, int y, DIR dir = UP);
 	void	Move(DIR moveDir);
-	void	Turn(DIR moveInp);
 	void	DebugLOG();
 	int		GetX();
 	int		GetY();
 	DIR		GetDIR();
-	std::vector<float>	Look(std::vector< std::vector<char>> map);
+	std::vector<float>	Look(std::vector< std::vector<char>> map);	
+	bool	foodFlag;
 
 private:
 	int		m_X;
