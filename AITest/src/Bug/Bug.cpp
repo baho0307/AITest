@@ -53,59 +53,107 @@ std::vector<float> Bug::Look(std::vector< std::vector<char>> map)
 	float	f;
 	int		i;
 
-	i = 0;
+	/*i = m_Y;
+	f = 0;
+	while ((map[i][m_X] == '0') && i >= 0)
+	{
+		f++;
+		i += -1;
+	}
+	lookData.push_back((map[i][m_X] - '0') / f);
+	i = m_X;
+	f = 0;
+	while ((map[m_Y][i] == '0') && i >= 0)
+	{
+		f++;
+		i += 1;
+	}
+	lookData.push_back((map[i][m_X] - '0') / f);
+	i = m_X;
+	f = 0;
+	while ((map[m_Y][i] == '0') && i >= 0)
+	{
+		f++;
+		i += -1;
+	}
+	lookData.push_back((map[i][m_X] - '0') / f);
+	i = m_Y;
+	f = 0;
+	while ((map[i][m_X] == '0') && i >= 0)
+	{
+		f++;
+		i += -1;
+	}
+	lookData.push_back((map[i][m_X] - '0') / f);*/
+
 	f = 0;
 	if (m_Dir == LEFT || m_Dir == RIGHT)
 	{
 		i = m_X;
-		while ((map[m_Y][i] != '0' - 1 && map[m_Y][i] != '1') && i >= 0)
+		while ((map[m_Y][i] == '0') && i >= 0)
 		{
 			f++;
 			i += m_Dir;
 		}
-		lookData.push_back(f * (map[m_Y][i] - '0'));
+		lookData.push_back((map[m_Y][i] - '0') / f);
 		f = 0;
-		i = m_Y;
-		while ((map[i][m_X] != '0' - 1 && map[i][m_X] != '1') && i >= 0)
+		i = m_X;
+		while ((map[m_Y][i] == '0') && i >= 0)
 		{
 			f++;
 			i -= m_Dir;
 		}
-		lookData.push_back(f * (map[i][m_X] - '0'));
+		lookData.push_back((map[m_Y][i] - '0') / f);
 		f = 0;
 		i = m_Y;
-		while ((map[i][m_X] != '0' - 1 && map[i][m_X] != '1') && i >= 0)
+		while ((map[i][m_X] == '0') && i >= 0)
+		{
+			f++;
+			i -= m_Dir;
+		}
+		lookData.push_back((map[i][m_X] - '0') / f);
+		f = 0;
+		i = m_Y;
+		while ((map[i][m_X] == '0') && i >= 0)
 		{
 			f++;
 			i += m_Dir;
 		}
-		lookData.push_back(f * (map[i][m_X] - '0'));
+		lookData.push_back((map[i][m_X] - '0') / f);
 	}
 	else
 	{
 		i = m_Y;
-		while ((map[i][m_X] != '0' - 1 && map[i][m_X] != '1') && i >= 0)
+		while ((map[i][m_X] == '0') && i >= 0)
 		{
 			f++;
 			i -= m_Dir / 2;
 		}
-		lookData.push_back(f * (map[i][m_X] - '0'));
+		lookData.push_back((map[i][m_X] - '0') / f);
 		f = 0;
-		i = m_X;
-		while ((map[m_Y][i] != '0' - 1 && map[m_Y][i] != '1') && i >= 0)
-		{
-			f++;
-			i -= m_Dir / 2;
-		}
-		lookData.push_back(f * (map[m_Y][i] - '0'));
-		f = 0;
-		i = m_X;
-		while ((map[m_Y][i] != '0' - 1 && map[m_Y][i] != '1') && i >= 0)
+		i = m_Y;
+		while ((map[i][m_X] == '0') && i >= 0)
 		{
 			f++;
 			i += m_Dir / 2;
 		}
-		lookData.push_back(f * (map[m_Y][i] - '0'));
+		lookData.push_back((map[i][m_X] - '0') / f);
+		f = 0;
+		i = m_X;
+		while ((map[m_Y][i] == '0') && i >= 0)
+		{
+			f++;
+			i -= m_Dir / 2;
+		}
+		lookData.push_back((map[m_Y][i] - '0') / f);
+		f = 0;
+		i = m_X;
+		while ((map[m_Y][i] == '0') && i >= 0)
+		{
+			f++;
+			i += m_Dir / 2;
+		}
+		lookData.push_back((map[m_Y][i] - '0') / f);
 	}
 
 	return lookData;

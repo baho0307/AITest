@@ -39,9 +39,6 @@
     <ClCompile Include="src\Map\Map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Draw\Draw.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Program.h">
@@ -63,9 +60,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Map\Map.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Draw\Draw.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

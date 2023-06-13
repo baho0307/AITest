@@ -13,7 +13,6 @@ Program::Program(std::vector<int> neuronCount, int genExCount, int mapSize)
 	}
 	genCounter = 0;
 	best = 0;
-	scr = Draw();
 }
 
 Program::Program()
@@ -50,7 +49,8 @@ void Program::GenReset()
 	i = 0;
 	while (i < gen.size())
 	{
-		if (i == max_i);
+		if (i == max_i)
+			gen[i].Reset(NONE, 50, mapSize);
 		else if (i == sec_i)
 			gen[i].Reset(RANDOM_NEURON, 50, mapSize);
 		else
@@ -83,9 +83,7 @@ void Program::Start()
 		i = 0;
 		while (i < gen.size() && IsFinished())
 		{
-			gen[i].Start();
-			if (i == best)
-				scr.Show(genCounter, gen[best]);
+			gen[i].Start(i == best);
 			i++;
 		}
 		GenReset();

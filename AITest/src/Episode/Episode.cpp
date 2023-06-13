@@ -12,14 +12,52 @@ void Episode::AddLifetime(int count)
 	}
 }
 
-void Episode::Start()
+void Episode::Show(int SAR)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	system("cls");
+	while (i < GetMap().size())
+	{
+		j = 0;
+		while (j < GetMap()[i].size())
+		{
+			if (i == GetBugY() && j == GetBugX())
+				std::cout << 'O';
+			//TAIL WILL BE ADDED
+			else
+			{
+				if (GetMap()[i][j] == '0' - 1)
+					std::cout << '#';
+				else if (GetMap()[i][j] == '0')
+					std::cout << ' ';
+				else
+					std::cout << 'F';
+			}
+			j++;
+		}
+		i++;
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+	std::cout << std::setw(6) << "MOVE: " << SAR << std::endl;
+	bug.DebugLOG();
+}
+
+void Episode::Start(bool show)
 {
 	int	i;
 
 	i = 0;
 	while (i < episode.size() && isAlive)
 	{
-		episode[i].DecideSit(net, bug.Look(map.GetMap()));
+		if (map.GetMap()[bug.GetY()][bug.GetX()] == '0')
+		{
+			episode[i].DecideSit(net, bug.Look(map.GetMap()));
+			bug.Move(episode[i].action);
+		}
 		if (map.GetMap()[bug.GetY()][bug.GetX()] == '0' - 1)
 			isAlive = false;
 		else if (map.GetMap()[bug.GetY()][bug.GetX()] == '1')
@@ -27,9 +65,12 @@ void Episode::Start()
 			AddLifetime(25);
 			map.GenerateFood();
 		}
-		else
-			bug.Move(episode[i].action);
 		point += episode[i].reward;
+		if (show)
+		{
+			Show(i);
+			std::this_thread::sleep_for(std::chrono::milliseconds(100));
+		}
 		i++;
 	}
 	isAlive = false;

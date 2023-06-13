@@ -42,8 +42,8 @@ void Map::GenerateFood()
 	map[fY][fX] = '0';
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> disx(0, x - 1);
-	std::uniform_int_distribution<> disy(0, y - 1);
+	std::uniform_int_distribution<> disx(1, x - 2);
+	std::uniform_int_distribution<> disy(1, y - 2);
 	fX = disx(gen);
 	fY = disy(gen);
 	map[fY][fX] = '1';

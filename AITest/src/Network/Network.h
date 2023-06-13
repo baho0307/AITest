@@ -5,6 +5,7 @@
 
 enum MUTATE_OPT {
 	RANDOM_NEURON = 101,
+	NONE = 110,
 	ALL_NEURONS = 111
 };
 

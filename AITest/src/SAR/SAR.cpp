@@ -13,11 +13,12 @@ void SAR::DecideSit(Network net, std::vector<float> sit)
 	std::vector<DIR>	d = {UP, LEFT, RIGHT, DOWN};
 
 	i = 0;
-	f = 0;
+	
 	max_i = 0;
 	net.CalcOut(sit);
 	while (net.GetDecision().size() > i)
 	{
+		f = net.GetDecision()[0] - 1;
 		if (net.GetDecision()[i] > f)
 		{
 			f = net.GetDecision()[i];

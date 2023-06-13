@@ -1,8 +1,12 @@
 #pragma once
 
+#include <chrono>
+#include <thread>
 #include "../Bug/Bug.h"
 #include "../SAR/SAR.h"
 #include "../Map/Map.h"
+
+class Draw;
 
 class Episode
 {
@@ -10,7 +14,8 @@ public:
 	Episode(int lifetime, std::vector<int> netLayer, int mapSize);
 	std::vector<std::vector<char>>	GetMap();
 	void				AddLifetime(int count);
-	void				Start();
+	void				Show(int SAR);
+	void				Start(bool show);
 	float				GetPoint();
 	int					GetBugX();
 	int					GetBugY();
