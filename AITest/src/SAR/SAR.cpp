@@ -10,7 +10,7 @@ void SAR::DecideSit(Network net, std::vector<float> sit)
 	int		i;
 	int		max_i;
 	float	f;
-	std::vector<DIR>	d = {UP, LEFT, RIGHT, DOWN};
+	std::vector<DIR>	d = {UP, RIGHT, LEFT, DOWN};
 
 	i = 0;
 	

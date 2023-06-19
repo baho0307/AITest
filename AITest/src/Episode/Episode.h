@@ -20,8 +20,10 @@ public:
 	int					GetBugX();
 	int					GetBugY();
 	DIR					GetBugDIR();
-	void				Reset(MUTATE_OPT opt, int lifetime, int mapSize);
+	Network				GetNet();
 	bool				GetLife();
+	void				Reset();
+	Episode				Crossover(Episode parent, int lifetime, std::vector<int> netLayer, int mapSize);
 private:
 	Map					map;
 	std::vector<SAR>	episode;

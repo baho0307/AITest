@@ -14,8 +14,14 @@ Bug::Bug(int x, int y, DIR dir)
 
 void Bug::Move(DIR moveDir)
 {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dis(-2, 2);
+	int x = dis(gen);
 	if (moveDir == LEFT || moveDir == RIGHT)
 		m_X += moveDir;
+	else if (moveDir == RANDOM)
+		Move(DIR(x));
 	else
 		m_Y += moveDir / 2;
 	m_Dir = moveDir;
@@ -46,157 +52,91 @@ DIR Bug::GetDIR()
 
 std::vector<float> Bug::Look(std::vector< std::vector<char>> map)
 {
+	foodFlag = false;
 	std::vector<float>	lookData;
 	float	f;
 	int		i;
 	// FRONT BARRIER
-	i = m_Y;
+	i = m_Y - 1;
 	f = 0;
 	while (map[i][m_X] != '0' - 1)
 	{
 		f++;
-		i += -1;
+		i--;
 	}
-	lookData.push_back(-1 / f);
-	i = m_Y;
-	f = 0;
+	lookData.push_back(-1 / (f + 1));
+	i = m_Y - 1;
 	// FRONT FOOD
 	while ((map[i][m_X] == '0'))
-	{
-		f++;
-		i += -1;
-	}
+		i--;
 	if (map[i][m_X] == '1')
 	{
 		lookData.push_back(1);
 		foodFlag = true;
 	}
+	else
+		lookData.push_back(0);
 	// RIGHT BARRIER
-	i = m_X;
+	i = m_X + 1;
 	f = 0;
 	while (map[m_Y][i] != '0' - 1)
 	{
 		f++;
-		i += 1;
+		i++;
 	}
-	lookData.push_back(-1 / f);
+	lookData.push_back(-1 / (f + 1));
 	// RIGHT FOOD
-	i = m_X;
-	f = 0;
+	i = m_X + 1;
 	while (map[m_Y][i] == '0')
-	{
-		f++;
-		i += 1;
-	}
+		i++;
 	if (map[m_Y][i] == '1')
 	{
 		lookData.push_back(1);
 		foodFlag = true;
 	}
+	else
+		lookData.push_back(0);
 	// LEFT BARRIER
-	i = m_X;
+	i = m_X - 1;
 	f = 0;
 	while (map[m_Y][i] != '0' - 1)
 	{
 		f++;
-		i += -1;
+		i--;
 	}
-	lookData.push_back(-1 / f);
+	lookData.push_back(-1 / (f + 1));
 	// LEFT FOOD
-	i = m_X;
-	f = 0;
+	i = m_X - 1;
 	while (map[m_Y][i] == '0')
-	{
-		f++;
-		i += -1;
-	}
+		i--;
 	if (map[m_Y][i] == '1')
 	{
 		lookData.push_back(1);
 		foodFlag = true;
 	}
+	else
+		lookData.push_back(0);
 	// DOWN BARRIER
-	i = m_Y;
+	i = m_Y - 1;
 	f = 0;
 	while ((map[i][m_X] != '0' - 1))
 	{
 		f++;
-		i += 1;
+		i++;
 	}
-	lookData.push_back(-1 / f);
+	lookData.push_back(-1 / (f + 1));
 	// DOWN FOOD
-	i = m_Y;
-	f = 0;
+	i = m_Y - 1;
 	while (map[i][m_X] == '0')
-	{
-		f++;
-		i += 1;
-	}
+		i++;
 	if (map[i][m_X] == '1')
 	{
 		lookData.push_back(1);
 		foodFlag = true;
 	}
+	else
+		lookData.push_back(0);
 
-	//f = 0;
-	//if (m_Dir == LEFT || m_Dir == RIGHT)
-	//{
-	//	// FRONT
-	//	i = m_X;
-	//	while ((map[m_Y][i] == '0') && i >= 0)
-	//	{
-	//		f++;
-	//		i += m_Dir;
-	//	}
-	//	lookData.push_back((map[m_Y][i] - '0') / f);
-	//	f = 0;
-	//	i = m_Y;
-	//	// LEFT
-	//	while ((map[i][m_X] == '0') && i >= 0)
-	//	{
-	//		f++;
-	//		i -= m_Dir;
-	//	}
-	//	lookData.push_back((map[i][m_X] - '0') / f);
-	//	f = 0;
-	//	i = m_Y;
-	//	// RIGHT
-	//	while ((map[i][m_X] == '0') && i >= 0)
-	//	{
-	//		f++;
-	//		i += m_Dir;
-	//	}
-	//	lookData.push_back((map[i][m_X] - '0') / f);
-	//}
-	//else
-	//{
-	//	// FRONT
-	//	i = m_Y;
-	//	while ((map[i][m_X] == '0') && i >= 0)
-	//	{
-	//		f++;
-	//		i -= m_Dir / 2;
-	//	}
-	//	lookData.push_back((map[i][m_X] - '0') / f);
-	//	f = 0;
-	//	i = m_X;
-	//	// LEFT
-	//	while ((map[m_Y][i] == '0') && i >= 0)
-	//	{
-	//		f++;
-	//		i -= m_Dir / 2;
-	//	}
-	//	lookData.push_back((map[m_Y][i] - '0') / f);
-	//	f = 0;
-	//	i = m_X;
-	//	// RIGHT
-	//	while ((map[m_Y][i] == '0') && i >= 0)
-	//	{
-	//		f++;
-	//		i += m_Dir / 2;
-	//	}
-	//	lookData.push_back((map[m_Y][i] - '0') / f);
-	//}
 	return lookData;
 }
 

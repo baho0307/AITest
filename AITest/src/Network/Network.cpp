@@ -32,6 +32,7 @@ void Network::CalcOut(std::vector<float> in)
 	std::vector<float>	sIn;
 	std::vector<float>	sNext;
 
+	decision.clear();
 	sIn = in;
 	i = 0;
 	while (i < neurons.size())
@@ -51,34 +52,22 @@ void Network::CalcOut(std::vector<float> in)
 	decision = sIn;
 }
 
-void Network::Mutate(MUTATE_OPT option)
+void Network::Mutate(Network parent, Network parent2)
 {
-	if (option == RANDOM_NEURON)
-	{
-		std::random_device rd;
-		std::mt19937 gen(rd());
-		std::uniform_int_distribution<> dis(0, neurons.size() - 1);
-		int	i = dis(gen);
-		std::uniform_int_distribution<> adis(0, neurons[i].size() - 1);
-		int	j = adis(gen);
-		neurons[i][j].Mutate();
-	}
-	else if (option == ALL_NEURONS)
-	{
-		int	i;
-		int	j;
+	int	i;
+	int	j;
+	std::vector<Network> p = { parent, parent2 };
 
-		i = 0;
-		while (i < neurons.size())
+	i = 0;
+	while (i < this->neurons.size())
+	{
+		j = 0;
+		while (j < this->neurons[i].size())
 		{
-			j = 0;
-			while (j < neurons[i].size())
-			{
-				neurons[i][j].Mutate();
-				j++;
-			}
-			i++;
+			this->neurons[i][j].Mutate(parent.neurons[i][j], parent2.neurons[i][j]);
+			j++;
 		}
+		i++;
 	}
 }
 

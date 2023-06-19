@@ -13,7 +13,8 @@ public:
 	void	Calc(std::vector<float> in);
 	void	DebugLOG();
 	float	GetOut();
-	void	Mutate();
+	void	Mutate(Neuron a, Neuron b);
+	void	SetWeight(int layer, int index, float val);
 
 
 private:

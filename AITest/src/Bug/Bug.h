@@ -3,13 +3,15 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
+#include <random>
 
 enum DIR
 {
-	LEFT	= -1,
-	RIGHT	= 1,
-	UP		= 2,
-	DOWN	= -2
+	LEFT = -1,
+	RIGHT = 1,
+	UP = 2,
+	DOWN = -2,
+	RANDOM = 3
 };
 
 class Bug

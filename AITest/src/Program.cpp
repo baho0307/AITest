@@ -11,6 +11,9 @@ Program::Program(std::vector<int> neuronCount, int genExCount, int mapSize)
 		gen.push_back(Episode(50, neuronCount, mapSize));
 		i++;
 	}
+	this->neuronCount = neuronCount;
+	this->genExCount = genExCount;
+	this->mapSize = mapSize;
 	genCounter = 0;
 	best = 0;
 }
@@ -25,53 +28,46 @@ int Program::GetGenCount()
 	return genCounter;
 }
 
+Episode Program::FindParent()
+{
+	int	i;
+
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> disx(0, this->gen.size() - 1);
+	i = disx(gen);
+	this->gen[i].Reset();
+	return this->gen[i];
+}
+
 void Program::GenReset()
 {
 	int		i;
 	int		max_i;
-	int		sec_i;
 	float	max_f;
+	std::vector<Episode>	newGen;
 
 	i = 0;
-	sec_i = 0;
-	max_i = 1;
+	max_i = 0;
 	max_f = 0;
 	while (i < gen.size())
 	{
 		if (max_f < gen[i].GetPoint())
 		{
 			max_f = gen[i].GetPoint();
-			sec_i = max_i;
 			max_i = i;
 		}
 		i++;
 	}
-	i = 0;
+	i = 1;
+	gen[max_i].Reset();
+	newGen.push_back(gen[max_i]);
 	while (i < gen.size())
 	{
-		if (i == max_i)
-			gen[i].Reset(NONE, 50, mapSize);
-		else if (i == sec_i)
-			gen[i].Reset(RANDOM_NEURON, 50, mapSize);
-		else
-			gen[i].Reset(ALL_NEURONS, 50, mapSize);
+		newGen.push_back(FindParent().Crossover(FindParent(), 50, neuronCount, mapSize));
 		i++;
 	}
-	best = max_i;
-}
-
-bool Program::IsFinished()
-{
-	int		i;
-
-	i = 0;
-	while (i < gen.size())
-	{
-		if (gen[i].GetLife())
-			return true;
-		i++;
-	}
-	return false;
+	gen = newGen;
 }
 
 void Program::Start()

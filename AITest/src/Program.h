@@ -9,13 +9,15 @@ public:
 	Program(std::vector<int> neuronCount, int genExCount, int mapSize);
 	Program();
 	int		GetGenCount();
+	Episode FindParent();
 	void	GenReset();
 	void	Start();
-	bool	IsFinished();
 private:
 	std::vector<Episode>	gen;
-	int						best;
+	std::vector<int>		neuronCount;
+	int						genExCount;
 	int						mapSize;
+	int						best;
 	int						genCounter;
 
 };

@@ -52,30 +52,40 @@ void Episode::Show(int SAR)
 void Episode::Start(bool show)
 {
 	int	i;
+	int	x;
+	int	y;
 
+	x = bug.GetX();
+	y = bug.GetY();
 	i = 0;
 	while (i < episode.size() && isAlive)
 	{
-		if (map.GetMap()[bug.GetY()][bug.GetX()] == '0')
+		if (map.GetMap()[bug.GetY()][bug.GetX()] != '0' - 1)
 		{
 			episode[i].DecideSit(net, bug.Look(map.GetMap()));
 			bug.Move(episode[i].action);
 		}
-		if (map.GetMap()[bug.GetY()][bug.GetX()] == '0' - 1)
+		else if (map.GetMap()[bug.GetY()][bug.GetX()] == '0' - 1)
 			isAlive = false;
-		else if (map.GetMap()[bug.GetY()][bug.GetX()] == '1')
+		if (map.GetMap()[bug.GetY()][bug.GetX()] == '1')
 		{
 			map.GenerateFood();
 			AddLifetime(25);
 			point += 100;
 		}
-		point += episode[i].reward;
+		point += episode[i].reward / (i + 1);
 		if (show)
 		{
 			Show(i);
 			std::this_thread::sleep_for(std::chrono::milliseconds(10));
 		}
 		i++;
+	}
+	point += 2 * sqrt(pow(bug.GetX() - x, 2) + pow(bug.GetY() - y, 2));
+	if (show)
+	{
+		Show(i - 1);
+		std::this_thread::sleep_for(std::chrono::milliseconds(10));
 	}
 	isAlive = false;
 }
@@ -100,21 +110,9 @@ DIR Episode::GetBugDIR()
 	return bug.GetDIR();
 }
 
-void Episode::Reset(MUTATE_OPT opt, int lifetime, int mapSize)
+Network Episode::GetNet()
 {
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> dis(1, mapSize - 1);
-	int x = dis(gen);
-	int y = dis(gen);
-
-	bug = Bug(x, y);
-	net.Mutate(opt);
-	episode.clear();
-	map = Map(mapSize, mapSize);
-	AddLifetime(lifetime);
-	isAlive = true;
-	point = 0;
+	return net;
 }
 
 bool Episode::GetLife()
@@ -122,11 +120,33 @@ bool Episode::GetLife()
 	return isAlive;
 }
 
+void Episode::Reset()
+{
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> dis(1, map.GetMap().size() - 2);
+	int x = dis(gen);
+	point = 0;
+	isAlive = true;
+	episode.clear();
+	map.GenerateFood();
+	bug = Bug(x,x);
+	this->AddLifetime(50);
+}
+
+Episode Episode::Crossover(Episode parent, int lifetime, std::vector<int> netLayer, int mapSize)
+{
+	Episode r(lifetime, netLayer, mapSize);
+
+	r.net.Mutate(this->net, parent.net);
+	return r;
+}
+
 Episode::Episode(int lifetime, std::vector<int> netLayer, int mapSize)
 {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> dis(1, mapSize - 1);
+	std::uniform_int_distribution<> dis(1, mapSize - 2);
 	int x = dis(gen);
 	int y = dis(gen);
 
